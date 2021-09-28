@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/title_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Название книги"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints"
+            />
+
+        <TextView
+            android:id="@+id/author_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Автор книги"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/title_field"
+            tools:ignore="MissingConstraints"
+            />
+
+        <TextView
+            android:id="@+id/releaseYear_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Год выпуска"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/author_field"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/rename_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_upgrade"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_button"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_baseline_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
