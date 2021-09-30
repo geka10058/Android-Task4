@@ -17,7 +17,10 @@ abstract class BookDatabase: RoomDatabase() {
         fun getDatabase(context: Context):BookDatabase{
             return INSTANCE ?: synchronized(this){
                 val instance = Room.databaseBuilder(
-                    context.applicationContext, BookDatabase::class.java, "book_database").build()
+                    context.applicationContext,
+                    BookDatabase::class.java,
+                    "book_database"
+                ).build()
                 INSTANCE = instance
                 instance
             }

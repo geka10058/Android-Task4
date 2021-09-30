@@ -16,15 +16,15 @@ interface BooksDao{
     suspend fun deleteBook(book: Book)
 
     @Query("Select * from booksTable order by id ASC")
-    suspend fun sorte():LiveData<List<Book>>
+    fun getAllBooks():LiveData<List<Book>>
 
     @Query("Select * from booksTable order by title ASC")
-    suspend fun sortedByTitle():LiveData<List<Book>>
+    fun sortedByTitle():LiveData<List<Book>>
 
     @Query("Select * from booksTable order by author ASC")
-    suspend fun sortedByAuthor():LiveData<List<Book>>
+    fun sortedByAuthor():LiveData<List<Book>>
 
     @Query("Select * from booksTable order by releaseYear ASC")
-    suspend fun sortedByReleaseYear():LiveData<List<Book>>
+    fun sortedByReleaseYear():LiveData<List<Book>>
 
 }

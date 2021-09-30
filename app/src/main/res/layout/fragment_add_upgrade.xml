@@ -7,40 +7,39 @@
     android:layout_marginStart="50dp"
     android:layout_marginTop="100dp"
     android:layout_marginEnd="50dp"
-    android:layout_marginBottom="100dp"
-    tools:context=".FragmentAdd">
+    android:layout_marginBottom="100dp">
 
     <EditText
-        android:id="@+id/text_field_one"
+        android:id="@+id/title_field_fr"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="Text field one"
+        android:text="Edit Title of book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/author_field_fr"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Text field two"
+        android:text="Edit author"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field_one"
+        app:layout_constraintTop_toBottomOf="@+id/title_field_fr"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/releaseYear_field_fr"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Text field three"
+        android:text="Edit year"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/author_field_fr" />
 
     <Button
         android:id="@+id/button_close"
@@ -51,11 +50,11 @@
         android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/releaseYear_field_fr"
         app:layout_constraintVertical_bias="0.502" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_add_upgrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -63,5 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/button_close"
-        tools:layout_editor_absoluteY="380dp" />
+        tools:layout_editor_absoluteY="380dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

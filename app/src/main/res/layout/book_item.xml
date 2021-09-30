@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/black_shade_2"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            android:text="Book Title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/author_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Автор книги"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_below="@id/title_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            />
+
+        <TextView
+            android:id="@+id/releaseYear_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author_field"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="4dp"
+            android:text="Год выпуска"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/upgrade_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/delete_button"
+            android:backgroundTint="@color/black_shade_2"
+            android:src="@drawable/ic_baseline_upgrade"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/black_shade_2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/ic_baseline_delete"
+             />
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black_shade_1">#0e2433</color>
     <color name="black_shade_2">#1C4966</color>
+    <color name="gray_white">#E6EAE9</color>
+    <color name="gray_2">#C4CCCF</color>
+    <color name="gray_3">#92A1A6</color>
 </resources>
