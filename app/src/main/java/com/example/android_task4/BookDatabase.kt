@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = arrayOf(Book::class), version = 1, exportSchema = false)
 abstract class BookDatabase: RoomDatabase() {
-    abstract fun getBooksDao(): BooksDao
+    abstract fun getBooksDao(): BookDao
 
     companion object{
 

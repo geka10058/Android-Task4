@@ -1,9 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_shade_1"
     tools:context=".AddUpgradeActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/editBookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:hint="Enter Book Title"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:singleLine="false">
+    </EditText>
+
+    <EditText
+        android:id="@+id/editBookAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        android:hint="Enter Book Author"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:gravity="start|top"
+        android:layout_below="@id/editBookTitle"
+        android:singleLine="false"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editBookReleaseYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editBookAuthor"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:hint="Enter Book Release Year"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:inputType="numberDecimal">
+
+    </EditText>
+
+    <Button
+        android:id="@+id/button_add_upgrade"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/black_shade_2"
+        />
+
+    <Button
+        android:id="@+id/button_close"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/close"
+        android:textColor="@color/black_shade_1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:backgroundTint="@color/black_shade_2"
+        />
+
+</RelativeLayout>

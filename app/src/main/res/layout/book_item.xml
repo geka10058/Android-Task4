@@ -29,14 +29,13 @@
             android:id="@+id/author_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Автор книги"
-            android:textSize="18sp"
-            android:textColor="@color/white"
             android:layout_below="@id/title_field"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:padding="4dp"
-            />
+            android:text="Автор книги"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/releaseYear_field"
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/author_field"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:padding="4dp"
             android:text="Год выпуска"

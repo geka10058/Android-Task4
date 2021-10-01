@@ -5,38 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task4.databinding.BookItemBinding
-import com.example.android_task4.databinding.DbItemBinding
 
-class BookRVAdapter(val context: Context):RecyclerView.Adapter<BookRVAdapter.ViewHolder>() {
-    private val allBooks = emptyList<Book>()
+class BookRVAdapter(
+    val context: Context,
+    val bookClickInterface: BookClickInterface,
+    val bookClickDeleteInterface: BookClickDeleteInterface
+    ):RecyclerView.Adapter<BookRVAdapter.ViewHolder>() {
+    private val allBooks = ArrayList<Book>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val binding = BookItemBinding.bind(itemView)
-        fun bind(book: Book) = with(binding){
-            titleField.text = book.bookTitle
-            authorField.text = book.bookAuthor
-            releaseYearField.text = book.bookReleaseYear
 
-            upgradeButton.setOnClickListener {
-                Toast.makeText(
-                    context,
-                    "Зесь олжно было быть переименование",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            deleteButton.setOnClickListener {
-
-                Toast.makeText(
-                    context,
-                    "Зесь олжно было быть удаление",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
+        val titleField = binding.titleField
+        val authorField = binding.authorField
+        val releaseYearField = binding.releaseYearField
         val deleteItem = binding.deleteButton
+        val upgradeItem = binding.upgradeButton
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,15 +33,15 @@ class BookRVAdapter(val context: Context):RecyclerView.Adapter<BookRVAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(allBooks[position])
-        // если не работает добавление данных, то видео  34:58
-        // если не работают кнопкки внутри, то 35:33
+        holder.titleField.setText(allBooks.get(position).bookTitle)
+        holder.authorField.setText(allBooks.get(position).bookAuthor)
+        holder.releaseYearField.setText(allBooks.get(position).bookReleaseYear)
         holder.deleteItem.setOnClickListener {
-            Toast.makeText(
-                context,
-                "Зесь ДОЛЖНО было быть удаление",
-                Toast.LENGTH_SHORT
-            ).show()
+            bookClickDeleteInterface.onBookDeleteIconClick(allBooks.get(position))
+        }
+
+        holder.upgradeItem.setOnClickListener {
+            bookClickInterface.onBookClick(allBooks.get(position))
         }
     }
 
@@ -63,9 +50,17 @@ class BookRVAdapter(val context: Context):RecyclerView.Adapter<BookRVAdapter.Vie
     }
 
     fun updateList(newList: List<Book>){
-        /*allBooks.clear()
-        allBooks.addAll(newList)*/
+        allBooks.clear()
+        allBooks.addAll(newList)
         notifyDataSetChanged()
     }
+}
+
+interface BookClickInterface{
+    fun onBookClick(book: Book)
+}
+
+interface BookClickDeleteInterface{
+    fun onBookDeleteIconClick(book: Book)
 }
 

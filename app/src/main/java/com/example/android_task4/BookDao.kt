@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface BooksDao{
+interface BookDao{
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addBook(book: Book)
@@ -16,15 +16,15 @@ interface BooksDao{
     suspend fun deleteBook(book: Book)
 
     @Query("Select * from booksTable order by id ASC")
-    fun getAllBooks():LiveData<List<Book>>
+    fun getAllBooks(): LiveData<List<Book>>
 
     @Query("Select * from booksTable order by title ASC")
-    fun sortedByTitle():LiveData<List<Book>>
+    fun sortedByTitle(): LiveData<List<Book>>
 
     @Query("Select * from booksTable order by author ASC")
-    fun sortedByAuthor():LiveData<List<Book>>
+    fun sortedByAuthor(): LiveData<List<Book>>
 
     @Query("Select * from booksTable order by releaseYear ASC")
-    fun sortedByReleaseYear():LiveData<List<Book>>
+    fun sortedByReleaseYear(): LiveData<List<Book>>
 
 }

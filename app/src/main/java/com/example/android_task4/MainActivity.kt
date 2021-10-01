@@ -3,13 +3,14 @@ package com.example.android_task4
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task4.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInterface {
 
     lateinit var binding: ActivityMainBinding
     lateinit var viewModel: BookViewModel
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         booksRecycler = binding.recycler
         booksRecycler.layoutManager = LinearLayoutManager(this)
 
-        val bookRVAdapter = BookRVAdapter(this)
+        val bookRVAdapter = BookRVAdapter(this,this,this)
         booksRecycler.adapter = bookRVAdapter
         viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(BookViewModel::class.java)
         viewModel.allBooks.observe(this, {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                     bookRVAdapter.updateList(it)
                 }
         })
+
         binding.addButton.setOnClickListener {
             val intent = Intent(this@MainActivity,AddUpgradeActivity::class.java)
             startActivity(intent)
@@ -38,6 +40,24 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onBookClick(book: Book) {
+        val intent = Intent(this@MainActivity,AddUpgradeActivity::class.java)
+        intent.putExtra("bookType", "Edit")
+        intent.putExtra("bookTitle", book.bookTitle)
+        intent.putExtra("bookAuthor", book.bookAuthor)
+        intent.putExtra("bookYear", book.bookReleaseYear)
+        intent.putExtra("bookID", book.id)
+        startActivity(intent)
+        this.finish()
+    }
+
+    override fun onBookDeleteIconClick(book: Book) {
+        viewModel.deleteBook(book)
+        Toast.makeText(this,"${book.bookTitle} Deleted", Toast.LENGTH_SHORT).show()
+
+    }
+
 
     /*@InternalCoroutinesApi
     lateinit var bookviewModel: BookViewModel
