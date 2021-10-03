@@ -3,7 +3,9 @@ package com.example.android_task4
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,5 +58,28 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
         viewModel.deleteBook(book)
         Toast.makeText(this,"${book.bookTitle} Deleted", Toast.LENGTH_SHORT).show()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this).apply {
+            setTitle("Confirmation")
+            setMessage("Are you sure you want to get out")
+
+            setPositiveButton("Yes") { _, _ ->
+                super.onBackPressed()
+            }
+
+            setNegativeButton("No"){_, _ ->
+                /*
+                Toast.makeText(this@MainActivity, "Thank you",
+                    Toast.LENGTH_LONG).show()*/
+            }
+            setCancelable(true)
+        }.create().show()
     }
 }
