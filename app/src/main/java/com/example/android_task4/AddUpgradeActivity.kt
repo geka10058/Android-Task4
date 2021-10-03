@@ -13,10 +13,17 @@ class AddUpgradeActivity : AppCompatActivity() {
     private lateinit var bookViewModel: BookViewModel
     private lateinit var binding: ActivityAddUpgradeBinding
 
+    //test<
     var bookID = -1
+    var title = ""
+    var author = ""
+    var releaseYear = ""
+    //test>
+
+    /*var bookID = -1
     lateinit var title: EditText
     lateinit var author: EditText
-    lateinit var releaseYear: EditText
+    lateinit var releaseYear: EditText*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +34,7 @@ class AddUpgradeActivity : AppCompatActivity() {
             this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(BookViewModel::class.java)
 
-        val bookType = intent.getStringExtra("bookType")
+        /*val bookType = intent.getStringExtra("bookType")
         if (bookType.equals("Edit")) {
             val bookTitle = intent.getStringExtra("bookTitle")
             val bookAuthor = intent.getStringExtra("bookAuthor")
@@ -39,10 +46,17 @@ class AddUpgradeActivity : AppCompatActivity() {
             releaseYear.setText(bookYear)
         } else {
             binding.buttonAddUpgrade.setText(R.string.add)
-        }
+        }*/
+
+        //test<
+        if (binding.editBookTitle.text.isEmpty() || binding.editBookAuthor.text.isEmpty() || binding.editBookReleaseYear.text.isEmpty()) {
+            binding.buttonAddUpgrade.setText(R.string.add)
+        } else binding.buttonAddUpgrade.setText(R.string.upgrade)
+
+        //test>
 
         binding.buttonAddUpgrade.setOnClickListener {
-            val bookTitle = title.text.toString()
+           /* val bookTitle = title.text.toString()
             val bookAuthor = author.text.toString()
             val bookYear = releaseYear.text.toString()
 
@@ -66,10 +80,36 @@ class AddUpgradeActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
             }
-            startActivity(Intent(applicationContext, MainActivity::class.java))
-            this.finish()
+            Toast.makeText(
+                this,
+                R.string.data_successfully_added,
+                Toast.LENGTH_SHORT
+            ).show()*/
+
+
+            //test<
+            if (binding.editBookTitle.text.isNotEmpty()
+                || binding.editBookAuthor.text.isNotEmpty()
+                || binding.editBookReleaseYear.text.isNotEmpty()) {
+                    title = binding.editBookTitle.text.toString()
+                    author = binding.editBookAuthor.text.toString()
+                    releaseYear = binding.editBookReleaseYear.text.toString()
+                    bookViewModel.addBook(Book(title,author,releaseYear))
+                Toast.makeText(
+                    this,
+                    R.string.data_successfully_added,
+                    Toast.LENGTH_SHORT
+                ).show()
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    this.finish()
+            } else Toast.makeText(this,
+                R.string.fill_in_all_fields,
+                Toast.LENGTH_SHORT
+            ).show()
+            //test>
+
+
 
         }
 
