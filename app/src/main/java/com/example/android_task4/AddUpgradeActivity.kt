@@ -3,8 +3,11 @@ package com.example.android_task4
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.example.android_task4.databinding.ActivityAddUpgradeBinding
 
 
@@ -91,4 +94,25 @@ class AddUpgradeActivity : AppCompatActivity() {
         this.finish()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem):Boolean {
+        if (item.itemId == R.id.action_settings){
+            val intent = Intent(this@AddUpgradeActivity,SettingsActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(
+                this,
+                "Settings run",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
 }

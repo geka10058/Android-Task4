@@ -2,14 +2,39 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreference
-        app:title="Switch"
-        app:key="switch"
-        app:defaultValue="false"
-        />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="check_box_preference_1"
-        android:title="Check box preference" />
+
+
+    <PreferenceCategory android:title="Sorting">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="Title"
+            android:title="Title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="Author"
+            android:title="Author" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="PageNumber"
+            android:title="Number of page" />
+
+        <ListPreference
+            android:key="pref_sort"
+            android:title="Sort by:"
+            android:summary="Set sorting option"
+            android:defaultValue="1"
+            android:entries="@array/sort_by"
+            android:entryValues="@array/sort_by"
+            android:dialogTitle="Выберите стиль для шрифта" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Database type">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="RoomDB"
+            android:title="Room" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

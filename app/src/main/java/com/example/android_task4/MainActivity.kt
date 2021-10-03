@@ -2,12 +2,16 @@ package com.example.android_task4
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task4.databinding.ActivityMainBinding
@@ -40,6 +44,87 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
             startActivity(intent)
             this.finish()
         }
+
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    var listener: SharedPreferences.OnSharedPreferenceChangeListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
+            val value = preference.getString(key, "Sort by Title")
+            when (value) {
+                "Sort by Title" -> viewModel.booksSortedByTitle
+                "Sort by Author" -> viewModel.booksSortedByAuthor
+                "Sort by Number of pages" -> viewModel.booksSortedByNumber
+            }
+        }
+
+    override fun onOptionsItemSelected(item: MenuItem):Boolean {
+        if (item.itemId == R.id.action_settings){
+            val intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val preference = PreferenceManager.getDefaultSharedPreferences(this)
+        val sortingBy = preference.getString("pref_sort", "Sort by Title")
+        when (sortingBy) {
+            "Sort by Title" -> {viewModel.booksSortedByTitle
+                Log.d("AppDebug", "SortTitleOK")}
+            "Sort by Author" -> {viewModel.booksSortedByAuthor
+                Log.d("AppDebug", "SortAuthorOK")}
+            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
+                Log.d("AppDebug", "SortNUMBErOK")}
+            else -> viewModel.allBooks
+        }
+        preference.registerOnSharedPreferenceChangeListener()
+        /*val sortingBy = preference.getString("pref_sort", "Sort by Title")
+        when (sortingBy) {
+            "Sort by Title" -> {viewModel.booksSortedByTitle
+                Log.d("AppDebug", "SortTitleOK")}
+            "Sort by Author" -> {viewModel.booksSortedByAuthor
+                Log.d("AppDebug", "SortAuthorOK")}
+            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
+                Log.d("AppDebug", "SortNUMBErOK")}
+            //else -> viewModel.allBooks
+        }*/
+        /*var sortingByTitleOn = preferences.getBoolean("Title",true)
+        var sortingByAuthorOn = preferences.getBoolean("Author", false)
+        var sortingByNumberOn = preferences.getBoolean("PageNumber",false)
+        Log.d("AppDebugTitlePref", "$sortingByTitleOn")
+        Log.d("AppDebugAuthorPref", "$sortingByAuthorOn")
+        Log.d("AppDebugNumberPagePref", "$sortingByNumberOn")*/
+
+        /*var sortingBy = preferences.getString("pref_sort","")
+        Log.d("AppDebugSortPref", "$sortingBy")
+        when(sortingBy){
+            "Sort by Title" -> {viewModel.booksSortedByTitle
+                Log.d("AppDebug", "SortTitleOK")}
+            "Sort by Author" -> {viewModel.booksSortedByAuthor
+                Log.d("AppDebug", "SortAuthorOK")}
+            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
+                Log.d("AppDebug", "SortNUMBErOK")}
+            else -> viewModel.allBooks
+        }*/
+
+        var listener: SharedPreferences.OnSharedPreferenceChangeListener =
+            SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
+                val sortingBy = preference.getString("pref_sort", "Sort by Title")
+                when (sortingBy) {
+                    "Sort by Title" -> {viewModel.booksSortedByTitle
+                        Log.d("AppDebug", "SortTitleOK")}
+                    "Sort by Author" -> {viewModel.booksSortedByAuthor
+                        Log.d("AppDebug", "SortAuthorOK")}
+                    "Sort by Number of pages" -> {viewModel.booksSortedByNumber
+                        Log.d("AppDebug", "SortNUMBErOK")}
+                    //else -> viewModel.allBooks
+                }
+            }
+        //preferences.registerOnSharedPreferenceChangeListener(listener)
+
+        //preferences.registerOnSharedPreferenceChangeListener(listener)
 
     }
 

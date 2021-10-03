@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_by">
+        <item>Sort by Title</item>
+        <item>Sort by Author</item>
+        <item>Sort by Number of pages</item>
+    </string-array>
+</resources>
