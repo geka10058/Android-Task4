@@ -11,7 +11,7 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
     var allBooks: LiveData<List<Book>>
     var booksSortedByTitle: LiveData<List<Book>>
     var booksSortedByAuthor: LiveData<List<Book>>
-    var booksSortedByYear: LiveData<List<Book>>
+    var booksSortedByNumber: LiveData<List<Book>>
     var repository: BookRepository
 
     init {
@@ -20,7 +20,7 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
         allBooks = repository.allBooks
         booksSortedByTitle = repository.booksSortedByTitle
         booksSortedByAuthor = repository.booksSortedByAuthor
-        booksSortedByYear = repository.booksSortedByYear
+        booksSortedByNumber = repository.booksSortedByNumber
     }
 
     fun addBook(book: Book) = viewModelScope.launch(Dispatchers.IO){

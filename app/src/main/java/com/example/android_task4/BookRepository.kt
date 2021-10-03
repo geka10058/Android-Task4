@@ -7,7 +7,7 @@ class BookRepository(private val booksDao: BookDao) {
     val allBooks: LiveData<List<Book>> = booksDao.getAllBooks()
     val booksSortedByTitle: LiveData<List<Book>> = booksDao.sortedByTitle()
     val booksSortedByAuthor: LiveData<List<Book>> = booksDao.sortedByAuthor()
-    val booksSortedByYear: LiveData<List<Book>> = booksDao.sortedByReleaseYear()
+    val booksSortedByNumber: LiveData<List<Book>> = booksDao.sortedByPageNumber()
 
     @WorkerThread
     suspend fun add(book: Book){

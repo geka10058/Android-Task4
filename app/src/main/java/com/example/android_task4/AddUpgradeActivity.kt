@@ -3,7 +3,6 @@ package com.example.android_task4
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.android_task4.databinding.ActivityAddUpgradeBinding
@@ -17,7 +16,7 @@ class AddUpgradeActivity : AppCompatActivity() {
     var bookID = -1
     var title = ""
     var author = ""
-    var releaseYear = ""
+    var pagesNumber = ""
     //test>
 
     /*var bookID = -1
@@ -49,9 +48,23 @@ class AddUpgradeActivity : AppCompatActivity() {
         }*/
 
         //test<
-        if (binding.editBookTitle.text.isEmpty() || binding.editBookAuthor.text.isEmpty() || binding.editBookReleaseYear.text.isEmpty()) {
+        val bookType = intent.getStringExtra("bookType")
+        if (bookType.equals("Edit")) {
+            val bookTitle = intent.getStringExtra("bookTitle")
+            val bookAuthor = intent.getStringExtra("bookAuthor")
+            val bookYear = intent.getStringExtra("bookNumber")
+            bookID = intent.getIntExtra("bookID", -1)
+            binding.buttonAddUpgrade.setText(R.string.upgrade)
+            title = binding.editBookTitle.setText(bookTitle).toString()
+            author = binding.editBookAuthor.setText(bookAuthor).toString()
+            pagesNumber = binding.editBookPageNumber.setText(bookYear).toString()
+        } else {
             binding.buttonAddUpgrade.setText(R.string.add)
-        } else binding.buttonAddUpgrade.setText(R.string.upgrade)
+        }
+
+        /*if (binding.editBookTitle.text.isEmpty() || binding.editBookAuthor.text.isEmpty() || binding.editBookReleaseYear.text.isEmpty()) {
+            binding.buttonAddUpgrade.setText(R.string.add)
+        } else binding.buttonAddUpgrade.setText(R.string.upgrade)*/
 
         //test>
 
@@ -89,24 +102,49 @@ class AddUpgradeActivity : AppCompatActivity() {
 
 
             //test<
-            if (binding.editBookTitle.text.isNotEmpty()
-                || binding.editBookAuthor.text.isNotEmpty()
-                || binding.editBookReleaseYear.text.isNotEmpty()) {
-                    title = binding.editBookTitle.text.toString()
-                    author = binding.editBookAuthor.text.toString()
-                    releaseYear = binding.editBookReleaseYear.text.toString()
-                    bookViewModel.addBook(Book(title,author,releaseYear))
-                Toast.makeText(
-                    this,
-                    R.string.data_successfully_added,
-                    Toast.LENGTH_SHORT
-                ).show()
+            title = binding.editBookTitle.text.toString()
+            author = binding.editBookAuthor.text.toString()
+            pagesNumber = binding.editBookPageNumber.text.toString()
+
+            if(bookType.equals("Edit")){
+                if(binding.editBookTitle.text.isNotEmpty() || binding.editBookAuthor.text.isNotEmpty() || binding.editBookPageNumber.text.isNotEmpty()){
+                    val updatedBook = Book(title,author,pagesNumber)
+                    updatedBook.id = bookID
+                    bookViewModel.upgradeBook(updatedBook)
+                    Toast.makeText(
+                        this,
+                        R.string.data_successfully_upgraded,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     startActivity(Intent(applicationContext, MainActivity::class.java))
                     this.finish()
-            } else Toast.makeText(this,
-                R.string.fill_in_all_fields,
-                Toast.LENGTH_SHORT
-            ).show()
+                }
+            } else {
+                if (binding.editBookTitle.text.isNotEmpty() || binding.editBookAuthor.text.isNotEmpty() || binding.editBookPageNumber.text.isNotEmpty()) {
+                    title = binding.editBookTitle.text.toString()
+                    author = binding.editBookAuthor.text.toString()
+                    pagesNumber = binding.editBookPageNumber.text.toString()
+                    bookViewModel.addBook(Book(title,author,pagesNumber))
+                    Toast.makeText(
+                        this,
+                        R.string.data_successfully_added,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(applicationContext, MainActivity::class.java))
+                    this.finish()
+                } else Toast.makeText(this,
+                    R.string.fill_in_all_fields,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+
+
+
+
+
+
+
             //test>
 
 

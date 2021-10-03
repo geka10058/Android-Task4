@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 class Book (
     @ColumnInfo(name = "title") val bookTitle:String,
     @ColumnInfo(name = "author") val bookAuthor:String,
-    @ColumnInfo(name = "releaseYear") val bookReleaseYear:String
+    @ColumnInfo(name = "pageNumber") val bookPageNumber:String
     ) {
     @PrimaryKey(autoGenerate = true)
     var id = 0

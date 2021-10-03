@@ -15,7 +15,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
-        android:hint="Enter Book Title"
+        android:hint="@string/enter_book_title"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:singleLine="false">
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
-        android:hint="Enter Book Author"
+        android:hint="@string/enter_book_author"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:gravity="start|top"
@@ -36,7 +36,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editBookReleaseYear"
+        android:id="@+id/editBookPageNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editBookAuthor"
@@ -44,7 +44,7 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
-        android:hint="Enter Book Release Year"
+        android:hint="@string/enter_number_of_pages"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:inputType="numberDecimal">
@@ -53,7 +53,7 @@
 
     <Button
         android:id="@+id/button_add_upgrade"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"

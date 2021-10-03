@@ -4,8 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_task4.databinding.BookItemBinding
 
@@ -21,7 +19,7 @@ class BookRVAdapter(
 
         val titleField = binding.titleField
         val authorField = binding.authorField
-        val releaseYearField = binding.releaseYearField
+        val pageNumberField = binding.pageNumberField
         val deleteItem = binding.deleteButton
         val upgradeItem = binding.upgradeButton
     }
@@ -35,7 +33,7 @@ class BookRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.titleField.setText(allBooks.get(position).bookTitle)
         holder.authorField.setText(allBooks.get(position).bookAuthor)
-        holder.releaseYearField.setText(allBooks.get(position).bookReleaseYear)
+        holder.pageNumberField.setText(allBooks.get(position).bookPageNumber)
         holder.deleteItem.setOnClickListener {
             bookClickDeleteInterface.onBookDeleteIconClick(allBooks.get(position))
         }

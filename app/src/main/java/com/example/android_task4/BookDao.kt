@@ -24,7 +24,7 @@ interface BookDao{
     @Query("Select * from booksTable order by author ASC")
     fun sortedByAuthor(): LiveData<List<Book>>
 
-    @Query("Select * from booksTable order by releaseYear ASC")
-    fun sortedByReleaseYear(): LiveData<List<Book>>
+    @Query("Select * from booksTable order by pageNumber ASC")
+    fun sortedByPageNumber(): LiveData<List<Book>>
 
 }

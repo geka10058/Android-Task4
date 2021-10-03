@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
         intent.putExtra("bookType", "Edit")
         intent.putExtra("bookTitle", book.bookTitle)
         intent.putExtra("bookAuthor", book.bookAuthor)
-        intent.putExtra("bookYear", book.bookReleaseYear)
+        intent.putExtra("bookNumber", book.bookPageNumber)
         intent.putExtra("bookID", book.id)
         startActivity(intent)
         this.finish()
