@@ -4,7 +4,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 
 class BookRepository(private val booksDao: BookDao) {
-    val allBooks: LiveData<List<Book>> = booksDao.getAllBooks()
+    val getallBooks: LiveData<List<Book>> = booksDao.getAllBooks()
     val booksSortedByTitle: LiveData<List<Book>> = booksDao.sortedByTitle()
     val booksSortedByAuthor: LiveData<List<Book>> = booksDao.sortedByAuthor()
     val booksSortedByNumber: LiveData<List<Book>> = booksDao.sortedByPageNumber()
@@ -22,5 +22,20 @@ class BookRepository(private val booksDao: BookDao) {
     @WorkerThread
     suspend fun upgrade(book: Book){
         booksDao.upgradeBook(book)
+    }
+
+    @WorkerThread
+    fun sortByTitle(): LiveData<List<Book>>{
+        return booksDao.sortedByTitle()
+    }
+
+    @WorkerThread
+    fun sortByAuthor(): LiveData<List<Book>>{
+        return booksDao.sortedByAuthor()
+    }
+
+    @WorkerThread
+    fun sortByNumber(): LiveData<List<Book>>{
+        return booksDao.sortedByPageNumber()
     }
 }

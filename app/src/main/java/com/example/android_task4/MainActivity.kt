@@ -1,6 +1,7 @@
 package com.example.android_task4
 
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,17 +32,20 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
         booksRecycler = binding.recycler
         booksRecycler.layoutManager = LinearLayoutManager(this)
 
-        val bookRVAdapter = BookRVAdapter(this,this,this)
+        val bookRVAdapter = BookRVAdapter(this, this, this)
         booksRecycler.adapter = bookRVAdapter
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(BookViewModel::class.java)
-        viewModel.allBooks.observe(this, {
-                list -> list?.let{
-                    bookRVAdapter.updateList(it)
-                }
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(BookViewModel::class.java)
+        viewModel.allBooks.observe(this, { list ->
+            list?.let {
+                bookRVAdapter.updateList(it)
+            }
         })
 
         binding.addButton.setOnClickListener {
-            val intent = Intent(this@MainActivity,AddUpgradeActivity::class.java)
+            val intent = Intent(this@MainActivity, AddUpgradeActivity::class.java)
             startActivity(intent)
             this.finish()
         }
@@ -48,19 +53,23 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    var listener: SharedPreferences.OnSharedPreferenceChangeListener =
+    /*var listener: SharedPreferences.OnSharedPreferenceChangeListener =
         SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
-            val value = preference.getString(key, "Sort by Title")
-            when (value) {
-                "Sort by Title" -> viewModel.booksSortedByTitle
-                "Sort by Author" -> viewModel.booksSortedByAuthor
-                "Sort by Number of pages" -> viewModel.booksSortedByNumber
+            val sortingBy = preference.getString("pref_sort", "Sort by Title")
+            when (sortingBy) {
+                "Sort by Title" -> {viewModel.sortByTitle()
+                    Log.d("AppDebug", "SortTitleOK")}
+                "Sort by Author" -> {viewModel.sortByAuthor()
+                    Log.d("AppDebug", "SortAuthorOK")}
+                "Sort by Number of pages" -> {viewModel.sortByNumberPage()
+                    Log.d("AppDebug", "SortNUMBErOK")}
+                else -> viewModel.allBooks
             }
-        }
+        }*/
 
-    override fun onOptionsItemSelected(item: MenuItem):Boolean {
-        if (item.itemId == R.id.action_settings){
-            val intent = Intent(this,SettingsActivity::class.java)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
         return true
@@ -70,66 +79,27 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
         super.onResume()
         val preference = PreferenceManager.getDefaultSharedPreferences(this)
         val sortingBy = preference.getString("pref_sort", "Sort by Title")
+
         when (sortingBy) {
-            "Sort by Title" -> {viewModel.booksSortedByTitle
-                Log.d("AppDebug", "SortTitleOK")}
-            "Sort by Author" -> {viewModel.booksSortedByAuthor
-                Log.d("AppDebug", "SortAuthorOK")}
-            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
-                Log.d("AppDebug", "SortNUMBErOK")}
+            "Sort by Title" -> {
+                val data = viewModel.sortByTitle()
+                Log.d("AppDebug", "SortTitleOK")
+            }
+            "Sort by Author" -> {
+                viewModel.sortByAuthor()
+                Log.d("AppDebug", "SortAuthorOK")
+            }
+            "Sort by Number of pages" -> {
+                viewModel.sortByNumberPage()
+                Log.d("AppDebug", "SortNUMBErOK")
+            }
             else -> viewModel.allBooks
         }
-        preference.registerOnSharedPreferenceChangeListener()
-        /*val sortingBy = preference.getString("pref_sort", "Sort by Title")
-        when (sortingBy) {
-            "Sort by Title" -> {viewModel.booksSortedByTitle
-                Log.d("AppDebug", "SortTitleOK")}
-            "Sort by Author" -> {viewModel.booksSortedByAuthor
-                Log.d("AppDebug", "SortAuthorOK")}
-            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
-                Log.d("AppDebug", "SortNUMBErOK")}
-            //else -> viewModel.allBooks
-        }*/
-        /*var sortingByTitleOn = preferences.getBoolean("Title",true)
-        var sortingByAuthorOn = preferences.getBoolean("Author", false)
-        var sortingByNumberOn = preferences.getBoolean("PageNumber",false)
-        Log.d("AppDebugTitlePref", "$sortingByTitleOn")
-        Log.d("AppDebugAuthorPref", "$sortingByAuthorOn")
-        Log.d("AppDebugNumberPagePref", "$sortingByNumberOn")*/
-
-        /*var sortingBy = preferences.getString("pref_sort","")
-        Log.d("AppDebugSortPref", "$sortingBy")
-        when(sortingBy){
-            "Sort by Title" -> {viewModel.booksSortedByTitle
-                Log.d("AppDebug", "SortTitleOK")}
-            "Sort by Author" -> {viewModel.booksSortedByAuthor
-                Log.d("AppDebug", "SortAuthorOK")}
-            "Sort by Number of pages" -> {viewModel.booksSortedByNumber
-                Log.d("AppDebug", "SortNUMBErOK")}
-            else -> viewModel.allBooks
-        }*/
-
-        var listener: SharedPreferences.OnSharedPreferenceChangeListener =
-            SharedPreferences.OnSharedPreferenceChangeListener { preference, key ->
-                val sortingBy = preference.getString("pref_sort", "Sort by Title")
-                when (sortingBy) {
-                    "Sort by Title" -> {viewModel.booksSortedByTitle
-                        Log.d("AppDebug", "SortTitleOK")}
-                    "Sort by Author" -> {viewModel.booksSortedByAuthor
-                        Log.d("AppDebug", "SortAuthorOK")}
-                    "Sort by Number of pages" -> {viewModel.booksSortedByNumber
-                        Log.d("AppDebug", "SortNUMBErOK")}
-                    //else -> viewModel.allBooks
-                }
-            }
-        //preferences.registerOnSharedPreferenceChangeListener(listener)
-
-        //preferences.registerOnSharedPreferenceChangeListener(listener)
-
+       // preference.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onBookClick(book: Book) {
-        val intent = Intent(this@MainActivity,AddUpgradeActivity::class.java)
+        val intent = Intent(this@MainActivity, AddUpgradeActivity::class.java)
         intent.putExtra("bookType", "Edit")
         intent.putExtra("bookTitle", book.bookTitle)
         intent.putExtra("bookAuthor", book.bookAuthor)
@@ -141,7 +111,7 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
 
     override fun onBookDeleteIconClick(book: Book) {
         viewModel.deleteBook(book)
-        Toast.makeText(this,"${book.bookTitle} Deleted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${book.bookTitle} Deleted", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -159,7 +129,7 @@ class MainActivity : AppCompatActivity(),BookClickInterface,BookClickDeleteInter
                 super.onBackPressed()
             }
 
-            setNegativeButton("No"){_, _ ->
+            setNegativeButton("No") { _, _ ->
                 /*
                 Toast.makeText(this@MainActivity, "Thank you",
                     Toast.LENGTH_LONG).show()*/

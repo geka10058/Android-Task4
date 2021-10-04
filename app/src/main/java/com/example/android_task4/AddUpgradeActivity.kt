@@ -80,7 +80,6 @@ class AddUpgradeActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
         }
 
         binding.buttonClose.setOnClickListener {
@@ -112,7 +111,4 @@ class AddUpgradeActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 }

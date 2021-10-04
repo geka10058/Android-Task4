@@ -17,7 +17,7 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
     init {
         val dao = BookDatabase.getDatabase(application).getBooksDao()
         repository = BookRepository(dao)
-        allBooks = repository.allBooks
+        allBooks = repository.getallBooks
         booksSortedByTitle = repository.booksSortedByTitle
         booksSortedByAuthor = repository.booksSortedByAuthor
         booksSortedByNumber = repository.booksSortedByNumber
@@ -34,4 +34,17 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
     fun deleteBook(book: Book) = viewModelScope.launch ( Dispatchers.IO){
         repository.delete(book)
     }
+
+    fun sortByTitle() = viewModelScope.launch(Dispatchers.IO) {
+        allBooks = repository.sortByTitle()
+    }
+
+    fun sortByAuthor() = viewModelScope.launch(Dispatchers.IO) {
+        allBooks = repository.sortByAuthor()
+    }
+
+    fun sortByNumberPage() = viewModelScope.launch(Dispatchers.IO) {
+        allBooks = repository.sortByNumber()
+    }
+
 }
