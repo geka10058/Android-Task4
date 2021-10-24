@@ -1,10 +1,10 @@
-package com.example.android_task4
+package com.example.android_task4.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface BookDao{
+interface BookDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addBook(book: Book)

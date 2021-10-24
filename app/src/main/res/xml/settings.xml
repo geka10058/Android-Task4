@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Sorting">
+
         <ListPreference
-            android:key="pref_sort"
-            android:title="Sort by:"
-            android:summary="Set sorting option"
-            android:defaultValue="1"
+            android:key="pref_sorting"
+            android:title="Choose sort type"
+            android:summary="Active: %s"
+            android:defaultValue="sort_title"
             android:entries="@array/sort_by"
-            android:entryValues="@array/sort_by"
-            android:dialogTitle="Выберите стиль для шрифта" />
+            android:entryValues="@array/sort_by_values"
+            android:dialogTitle="Choose sort type" />
+
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Database type">
+    <PreferenceCategory
+        android:title="Database type">
 
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="RoomDB"
-            android:title="Room" />
+            android:key="pref_use_room"
+            android:title="User Room"
+            android:defaultValue="true" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
