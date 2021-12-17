@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -23,17 +24,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }
 
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xopt-in=kotlin.RequiresOptIn",
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        ]
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -41,42 +49,37 @@ android {
 
 
 dependencies {
-        implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
-        implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
+    // UI
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
 
-        implementation 'androidx.preference:preference:1.1.1'
-        // Dependencies for working with Architecture components
-        // You'll probably have to update the version numbers in build.gradle (Project)
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.androidxNavigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.androidxNavigationVersion"
 
-        // Room components
-        implementation "androidx.room:room-ktx:$rootProject.roomVersion"
-        implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-        implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    // Preferences
+    implementation "androidx.preference:preference-ktx:$rootProject.androidxPreferencesVersion"
+    implementation "com.fredporciuncula:flow-preferences:$rootProject.flowPreferencesVersion"
 
-        kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-        androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.daggerVersion"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.daggerVersion"
 
-        // Lifecycle components
-        implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
-        implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
-        implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
+    // Room components
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
 
-        // Kotlin components
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-        api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
-        api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
-        // UI
-        implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-        implementation "com.google.android.material:material:$rootProject.materialVersion"
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion"
 
-        // Testing
-        testImplementation "junit:junit:$rootProject.junitVersion"
-        androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-        androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.espressoVersion", {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        })
-        androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
-
-
+    // Kotlin components
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 }

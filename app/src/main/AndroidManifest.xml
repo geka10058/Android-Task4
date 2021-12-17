@@ -8,23 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/booksapp"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidTask4">
-        <activity android:name=".SettingsActivity"
-            />
+        android:theme="@style/Theme.AndroidTask4"
+        android:name=".SampleApp">
+
         <activity
-            android:name=".AddUpgradeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AndroidTask4.NoActionBar">
+            android:name=".presentation.main.MainActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.settings.SettingsActivity"/>
+
+        <activity
+            android:name=".presentation.update.AddUpgradeActivity" />
+
     </application>
 
 </manifest>
